@@ -1,0 +1,16 @@
+<form #loginForm="ngForm" (submit)="onLoginFormSubmit(loginForm.value)">
+  <mat-form-field>
+    <input matInput ngModel name="email" placeholder="Email" type="email" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput ngModel name="password" placeholder="Enter your password" [type]="isPasswordVisible ? 'text' : 'password'" required minlength="6">
+
+    <button mat-icon-button matSuffix (click)="isPasswordVisible = !isPasswordVisible"
+      [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isPasswordVisible">
+      <mat-icon>{{ isPasswordVisible ? 'visibility' : 'visibility_off' }}</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <button mat-button [disabled]="loginForm.invalid">Login</button>
+</form>
