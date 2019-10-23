@@ -11,6 +11,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './core/store/effects/auth.effects';
 
 import { reducers } from './core/store/states/app.states';
+import { CountryModule } from './country/country.module';
 
 @NgModule({
   declarations: [
@@ -18,8 +19,11 @@ import { reducers } from './core/store/states/app.states';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+
     AuthModule,
+    CountryModule,
+    AppRoutingModule,
+
     SharedModule,
     StoreModule.forRoot(reducers, {}),
     EffectsModule.forRoot([AuthEffects])
