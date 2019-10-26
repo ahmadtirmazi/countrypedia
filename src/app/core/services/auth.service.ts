@@ -19,6 +19,12 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
+  isAuthenticated(): boolean {
+    const token = this.getAuthToken();
+    // Additionally, we can check for expiry of auth token
+    return token != null;
+  }
+
   login(data: IUserLogin): Observable<any> {
     console.log('login', data);
     if (data.email === this.dummyUser.email && data.password === this.dummyUser.password) {

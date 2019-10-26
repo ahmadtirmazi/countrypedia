@@ -31,7 +31,7 @@ export class AuthEffects {
     tap((user) => {
       console.log('Login successful');
       localStorage.setItem('token', user.payload.token);
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/countries');
     })
   );
 

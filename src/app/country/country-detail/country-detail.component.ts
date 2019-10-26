@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState, selectActiveCountry, selectCountryErrorMessage } from 'src/app/core/store/states/app.states';
+import { GetCountryDetails } from 'src/app/core/store/actions/country.actions';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-country-detail',
@@ -7,9 +12,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CountryDetailComponent implements OnInit {
 
-  constructor() { }
+  countryDetails$: Observable<any>;
+  errorMessage$: Observable<any>;
+  routeParams$: Observable<any>;
+  countryName: string;
+
+  constructor(
+    private store: Store<AppState>,
+    private route: ActivatedRoute
+    ) {
+      this.routeParams$ = this.route.params;
+    }
 
   ngOnInit() {
+    this.routeParams$.subscribe(params => {
+      this.countryName = params.countryName;
+      this.store.dispatch(new GetCountryDetails({ countryName: this.countryName }));
+   });
+
+    this.countryDetails$ = this.store.select(selectActiveCountry);
+    this.errorMessage$ = this.store.select(selectCountryErrorMessage);
   }
 
 }

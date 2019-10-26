@@ -24,7 +24,8 @@ export function reducer(state = initialState, action: AuthActionTypes): State {
         user: {
           email: action.payload.email,
           token: action.payload.token
-        }
+        },
+        errorMessage: null
       };
     }
 

@@ -1,3 +1,11 @@
-<p>
-  country-detail works!
-</p>
+<a routerLink='/countries'>
+  Back to List
+</a>
+
+<ng-container *ngIf="(countryDetails$ | async) as countryDetails">
+  <h4>
+    {{countryDetails.name}}
+  </h4>
+</ng-container>
+
+<p>{{errorMessage$ | async}}</p>

@@ -12,6 +12,7 @@ import { AuthEffects } from './core/store/effects/auth.effects';
 
 import { reducers } from './core/store/states/app.states';
 import { CountryModule } from './country/country.module';
+import { CountryEffects } from './core/store/effects/country.effects';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { CountryModule } from './country/country.module';
 
     SharedModule,
     StoreModule.forRoot(reducers, {}),
-    EffectsModule.forRoot([AuthEffects])
+    EffectsModule.forRoot([AuthEffects, CountryEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

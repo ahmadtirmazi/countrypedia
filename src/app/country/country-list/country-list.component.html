@@ -1,3 +1,6 @@
-<p>
-  country-list works!
-</p>
+<mat-card *ngFor="let country of (selectCountryState$ | async)?.countries">
+  <mat-card-title>{{country.name}}</mat-card-title>
+  <mat-card-actions>
+    <button mat-button (click)="onClickViewDetails(country.name)">View Details</button>
+  </mat-card-actions>
+</mat-card>
