@@ -10,7 +10,7 @@ export interface State {
 }
 
 export const initialState: State = {
-  isAuthenticated: false,
+  isAuthenticated: localStorage.getItem('token') ? true : false,
   user: null,
   errorMessage: null
 };
@@ -40,6 +40,19 @@ export function reducer(state = initialState, action: AuthActionTypes): State {
         errorMessage: action.payload.message
       };
     }
+
+    case AuthActions.LOGOUT: {
+      return {
+        ...state,
+        isAuthenticated: false,
+        user: {
+          email: null,
+          token: null
+        },
+        errorMessage: null
+      };
+    }
+
     default: {
       return state;
     }

@@ -1,19 +1,40 @@
-<form #loginForm="ngForm" (submit)="onLoginFormSubmit(loginForm.value)">
-  <mat-form-field>
-    <input matInput ngModel name="email" placeholder="Email" type="email" required>
-  </mat-form-field>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Login</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form #loginForm="ngForm" autocomplete="off" action="#">
+      <table cellspacing="0">
+        <tr>
+          <td>
+            <mat-form-field>
+              <input matInput ngModel name="email" placeholder="Email" type="email" required autofocus>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field>
+              <input matInput ngModel name="password" placeholder="Enter your password"
+                [type]="isPasswordVisible ? 'text' : 'password'" required minlength="6">
 
-  <mat-form-field>
-    <input matInput ngModel name="password" placeholder="Enter your password" [type]="isPasswordVisible ? 'text' : 'password'" required minlength="6">
-
-    <button mat-icon-button matSuffix (click)="isPasswordVisible = !isPasswordVisible"
-      [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isPasswordVisible">
-      <mat-icon>{{ isPasswordVisible ? 'visibility' : 'visibility_off' }}</mat-icon>
+                <mat-icon [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isPasswordVisible" matSuffix
+                  (click)="isPasswordVisible = !isPasswordVisible">{{ isPasswordVisible ? 'visibility' : 'visibility_off' }}
+                </mat-icon>
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+    </form>
+    <span>{{(getAuthState$ | async).errorMessage}}</span>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button
+        [disabled]="loginForm.invalid"
+        (click)="onLoginFormSubmit(loginForm.value)"
+        type="submit"
+        color="primary">
+        Login
     </button>
-  </mat-form-field>
-
-  <button mat-button [disabled]="loginForm.invalid">Login</button>
-
-
-  <span>{{(getAuthState$ | async).errorMessage}}</span>
-</form>
+  </mat-card-actions>
+</mat-card>

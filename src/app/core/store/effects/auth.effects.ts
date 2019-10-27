@@ -30,7 +30,6 @@ export class AuthEffects {
     ofType(AuthActions.LOGIN_SUCCESS),
     tap((user) => {
       console.log('Login successful');
-      localStorage.setItem('token', user.payload.token);
       this.router.navigateByUrl('/countries');
     })
   );
@@ -41,5 +40,11 @@ export class AuthEffects {
     tap((action) => {
       console.error(action.payload.message);
     })
+  );
+
+  @Effect({ dispatch: false })
+  logout$ = this.actions$.pipe(
+    ofType(AuthActions.LOGOUT),
+    tap(() => this.authService.logout())
   );
 }

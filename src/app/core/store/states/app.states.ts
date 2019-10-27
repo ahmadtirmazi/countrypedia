@@ -15,6 +15,11 @@ export const reducers = {
 
 export const selectAuthState = createFeatureSelector<AppState>('auth');
 
+export const selectIsAuthenticated = createSelector(
+  selectAuthState,
+  (state: any) => state.isAuthenticated
+);
+
 export const selectCountryState = createFeatureSelector<AppState>('country');
 
 export const selectActiveCountry = createSelector(

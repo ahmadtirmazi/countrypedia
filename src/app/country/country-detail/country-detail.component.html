@@ -1,11 +1,25 @@
-<a routerLink='/countries'>
-  Back to List
-</a>
+<ng-container *ngIf="(countryDetails$ | async) as country">
+  <mat-card>
+    <mat-card-title>{{country.name}}</mat-card-title>
+    <mat-card-content>
+      <p>Region: {{ country.region }}</p>
+      <p>Sub Region: {{ country.subregion }}</p>
+      <p>Capital City: {{ country.capital }}</p>
+      <p>Population: {{ country.population | number }}</p>
+      <p>Area: {{ country.area | number }}</p>
+      <p>Borders: {{ country.borders.join(', ') }}</p>
+      <p>Numeric Code: {{ country.numericCode }}</p>
+      <p>Calling Codes: {{ country.callingCodes }}</p>
+      <p>Currencies: {{ country.currencies.join(', ') }}</p>
+      <p>Languages: {{ country.languages.join(', ') }}</p>
 
-<ng-container *ngIf="(countryDetails$ | async) as countryDetails">
-  <h4>
-    {{countryDetails.name}}
-  </h4>
+
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="onClickBackToList()">Back to List</button>
+    </mat-card-actions>
+  </mat-card>
+
 </ng-container>
 
 <p>{{errorMessage$ | async}}</p>

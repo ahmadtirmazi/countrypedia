@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState, selectActiveCountry, selectCountryErrorMessage } from 'src/app/core/store/states/app.states';
 import { GetCountryDetails } from 'src/app/core/store/actions/country.actions';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-country-detail',
@@ -19,7 +19,8 @@ export class CountryDetailComponent implements OnInit {
 
   constructor(
     private store: Store<AppState>,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
     ) {
       this.routeParams$ = this.route.params;
     }
@@ -32,6 +33,10 @@ export class CountryDetailComponent implements OnInit {
 
     this.countryDetails$ = this.store.select(selectActiveCountry);
     this.errorMessage$ = this.store.select(selectCountryErrorMessage);
+  }
+
+  onClickBackToList() {
+    this.router.navigateByUrl('/countries');
   }
 
 }

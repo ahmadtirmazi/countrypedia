@@ -1,0 +1,9 @@
+<mat-toolbar>
+  <span>{{title}}</span>
+
+  <span class="fill-remaining-space"></span>
+
+  <span *ngIf="(isAuthenticated$ | async)">
+      <span class="clickable" (click)="onClickLogout()">Logout</span>
+  </span>
+</mat-toolbar>
