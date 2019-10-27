@@ -1,0 +1,15 @@
+<div fxLayout="row" fxLayoutAlign="center center">
+  <h3>World Countries</h3>
+</div>
+
+<mat-card *ngFor="let country of (selectCountryState$ | async)?.countries; let even=even;"
+  [ngClass]="{ 'country-even-cell' : even }">
+  <mat-card-title>{{country.name}}</mat-card-title>
+  <mat-card-content>
+    <p>Region: {{ country.region }}</p>
+    <p>Capital City: {{ country.capital }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button color="accent" (click)="onClickViewDetails(country.name)">View Details</button>
+  </mat-card-actions>
+</mat-card>
